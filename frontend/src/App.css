@@ -1,7 +1,11 @@
+/* --- Pengaturan Dasar --- */
 .App {
   text-align: center;
+  width: 100%;
+  overflow-x: hidden; /* Mencegah geser ke samping */
 }
 
+/* --- Logo Animation --- */
 .App-logo {
   height: 40vmin;
   pointer-events: none;
@@ -13,6 +17,7 @@
   }
 }
 
+/* --- Header --- */
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
@@ -22,6 +27,9 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
+  width: 100%;
+  padding: 20px;
+  box-sizing: border-box; /* Penting: agar padding tidak merusak lebar */
 }
 
 .App-link {
@@ -29,43 +37,36 @@
 }
 
 @keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
 }
 
+/* --- Ticker (Running Text) --- */
 .ticker-container {
   width: 100%;
-  overflow: hidden;       /* sembunyikan scrollbar */
+  overflow: hidden;
   background-color: #131b2f;
-  padding: 5px 0;
+  padding: 10px 0;
+  box-sizing: border-box;
 }
 
 .ticker-track {
   display: flex;
-  gap: 40px;             /* jarak antar saham */
-  white-space: nowrap;    /* jangan wrap */
+  gap: 20px;
+  white-space: nowrap;
   width: max-content;
-  animation: tickerMove 120s linear infinite; /* gerak horizontal */
+  animation: tickerMove 60s linear infinite;
 }
 
 .ticker-track:hover {
-  animation-play-state: paused; /* berhenti saat hover */
+  animation-play-state: paused;
 }
 
 @keyframes tickerMove {
-  0% {
-    transform: translateX(100%);  /* mulai dari kanan */
-  }
-  100% {
-    transform: translateX(-100%); /* sampai ke kiri */
-  }
+  0% { transform: translateX(100%); }
+  100% { transform: translateX(-100%); }
 }
 
-/* Optional: styling tiap item ticker */
 .ticker-item {
   display: flex;
   align-items: center;
@@ -73,4 +74,15 @@
   color: #ffffff;
   font-weight: bold;
   font-size: 14px;
+}
+
+/* --- Responsive Media Query untuk HP --- */
+@media (max-width: 768px) {
+  .App-header {
+    font-size: 16px; /* Mengecilkan teks di HP agar tidak terlalu besar */
+  }
+  
+  .ticker-track {
+    animation: tickerMove 40s linear infinite; /* Sedikit lebih cepat di HP */
+  }
 }
