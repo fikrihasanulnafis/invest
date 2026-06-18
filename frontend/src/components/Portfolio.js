@@ -325,25 +325,23 @@ export default function Portfolio() {
       </div>
 
       {/* ── DONUT + ANALISIS RETURN ────────────────────────────────── */}
-      {/* DONUT CHART - VERSI RESPONSIVE */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+        {/* Donut */}
         <div className="bg-[#131b2f] border border-slate-700 rounded p-5">
           <h3 className="text-xl font-bold text-white uppercase tracking-widest mb-4">
             Alokasi Optimal (Markowitz)
           </h3>
-          
-          <div className="flex flex-col md:flex-row items-center justify-center gap-6">
-            {/* Container Grafik: Lebar menyesuaikan layar HP */}
-            <div className="relative w-full max-w-[280px] h-64">
+          <div className="flex items-center justify-center gap-8">
+            <div className="relative w-72 h-72 flex-shrink-0 ml-10">
               <ResponsiveContainer width="100%" height="100%">
                 <PieChart>
                   <Pie
                     data={portfolioData}
-                    innerRadius="60%"
-                    outerRadius="90%"
+                    innerRadius={85}
+                    outerRadius={130}
                     paddingAngle={0}
                     dataKey="value"
-                    stroke="none"
-                  >
+                    stroke="none">
                     {portfolioData.map((_, idx) => (
                       <Cell key={idx} fill={COLORS[idx % COLORS.length]} />
                     ))}
@@ -359,25 +357,26 @@ export default function Portfolio() {
                   />
                 </PieChart>
               </ResponsiveContainer>
-              
-              {/* Teks Tengah */}
               <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
                 <span className="text-slate-500 text-[10px]">Jumlah Saham</span>
                 <span className="text-3xl font-bold text-white">
-                  {portfolioData.filter((d) => d.name !== "Belum ada data").length || portfolioData.length}
+                  {portfolioData.filter((d) => d.name !== "Belum ada data")
+                    .length || portfolioData.length}
                 </span>
               </div>
             </div>
-
-            {/* Legenda: Mengikuti lebar container */}
-            <div className="w-full md:w-1/2 space-y-2">
+            <div className="flex-1 space-y-2">
               {portfolioData.map((item, idx) => (
-                <div key={idx} className="flex items-center justify-between gap-2">
+                <div
+                  key={idx}
+                  className="flex items-center justify-between w-2/3">
                   <div className="flex items-center gap-2">
                     <div
                       className="w-2.5 h-2.5 rounded-sm flex-shrink-0"
-                      style={{ backgroundColor: COLORS[idx % COLORS.length] }}></div>
-                    <span className="text-white text-sm font-semibold truncate">
+                      style={{
+                        backgroundColor: COLORS[idx % COLORS.length],
+                      }}></div>
+                    <span className="text-white text-sm font-semibold">
                       {item.name}
                     </span>
                   </div>
